@@ -1,0 +1,55 @@
+{
+  "url": "https://my.usa.gov/oauth",
+  "oauth2": {
+    "authorize": {
+      "url": "/authorize",
+      "query": {
+        "scope": "{scope}",
+        "redirect_uri": "{{callback}}",
+        "client_id": "{client_id}",
+        "state": "{{state}}",
+        "response_type": "code"
+      },
+      "method": "post"
+    },
+    "request": {
+      "url": "/profile",
+      "cors": true,
+      "query": {
+        "access_token": "{{token}}"
+      }
+    },
+    "access_token": {
+      "url": "/authorize",
+      "method": "post",
+      "query": {
+        "access_token": "{{token}}",
+        "state": "{{state}}",
+        "grant_type": "authorization_code",
+        "code": "{{code}}",
+        "client_id": "{client_id}",
+        "client_secret": "{client_secret}",
+        "redirect_uri": "{{callback}}"
+      }
+    },
+    "parameters": {
+      "client_secret": "string",
+      "client_id": "string",
+      "scope": {
+        "values": {
+          "profile": "Provides access to the profile"
+        },
+        "cardinality": "*",
+        "separator": " ",
+        "type": "string"
+      }
+    }
+  },
+  "name": "MyUSA",
+  "href": {
+    "keys": "https://my.usa.gov/apps",
+    "docs": "https://my.usa.gov/developer",
+    "apps": "https://my.usa.gov/apps",
+    "provider": "https://my.usa.gov/"
+  }
+}
